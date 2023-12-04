@@ -9,7 +9,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: cluster-1    # Add your cluster name here.
   GKE_ZONE: us-central1   # Add your cluster zone here.
-  DEPLOYMENT_NAME: amanda-api # Add your deployment name here. testing full tutorial follow, now added docker image in cloud, test
+  DEPLOYMENT_NAME: amanda-api # Add your deployment name here. testing full tutorial follow, now added docker image in cloud
   IMAGE: amanda-api
 
 jobs:
