@@ -9,8 +9,8 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: cluster-1
   GKE_ZONE: us-central1
-  DEPLOYMENT_NAME: gabe-api
-  IMAGE: gabe-api
+  DEPLOYMENT_NAME: amanda-api
+  IMAGE: amanda-api
 
 jobs:
   setup-build-publish-deploy:
