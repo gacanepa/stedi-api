@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: redi-stedi-amanda
+  name: redis-stedi-gabe
 spec:
   selector:
     matchLabels:
-      app: redis-stedi-amanda  # has to match .spec.template.metadata.labels
-  serviceName: redis-stedi-amanda
+      app: redis-stedi-gabe  # has to match .spec.template.metadata.labels
+  serviceName: redis-stedi-gabe
   replicas: 1
   template:
     metadata:
       labels:
-        app: redis-stedi-amanda  # has to match .spec.selector.matchLabels
+        app: redis-stedi-gabe  # has to match .spec.selector.matchLabels
     spec:
       containers:
-        - name: redis-stedi-amanda
+        - name: redis-stedi-gabe
           image: redis:7.0.5-alpine
           imagePullPolicy: Always
           args: ["--requirepass", "$(REDIS_PASS)", "--appendonly", "yes", "--save", "900", "1", "--save", "30", "2"]
@@ -25,14 +25,14 @@ spec:
           - name: REDIS_PASS
             valueFrom:
               secretKeyRef:
-                name: redis-secrets-amanda
+                name: redis-secrets-gabe
                 key: REDIS_PASS
           volumeMounts:
-            - name: redis-amanda-volume
+            - name: redis-gabe-volume
               mountPath: /data
   volumeClaimTemplates:
   - metadata:
-      name: redis-amanda-volume
+      name: redis-gabe-volume
     spec:
       accessModes:
         - ReadWriteOnce
@@ -43,11 +43,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis-stedi-amanda
+  name: redis-stedi-gabe
 spec:
   ports:
     - port: 6379
       name: redis
   clusterIP: None
   selector:
-    app: redis-stedi-amanda
+    app: redis-stedi-gabe
