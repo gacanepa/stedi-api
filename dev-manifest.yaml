@@ -8,7 +8,7 @@ kind: Deployment
 # Metadata is information related to the object we created in Kubernetes
 metadata:
 # The name here is the name of our deployment  
-  name: dev-stedi-amanda
+  name: dev-stedi-gabe
 spec:
 # Replicas refers to the number of pods we deploy
   replicas: 1
@@ -17,29 +17,29 @@ spec:
 # Matchlabels are a label for my selector  
     matchLabels:
 # App is a specific kind of label for my pod
-      app: dev-stedi-amanda
+      app: dev-stedi-gabe
 # The Template describes all the features of my pod
   template:
 # The metadata provides labels for my template  
     metadata:
       labels:
-        app: dev-stedi-amanda
+        app: dev-stedi-gabe
 # The spec refers to the specification of my containers in my pod        
     spec:
 # Containers can have one or more Docker containers in the pod
       containers:
 # The name of the container is specified below      
-        - name: dev-stedi-amanda
+        - name: dev-stedi-gabe
 # The image is a prebuilt file containing the operating system        
-          image: us-docker.pkg.dev/w09-project/amanda-api/stedi-api # IMAGE NEEDS TO BE ARTIFACT REGISTRY NEW REPOSITORY
+          image: us-docker.pkg.dev/w09-project/gabe-api/stedi-api # IMAGE NEEDS TO BE ARTIFACT REGISTRY NEW REPOSITORY
           env:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: redis-secrets-amanda
+                  name: redis-secrets-gabe
                   key: REDIS_PASS
             - name: REDIS_HOST
-              value: "redis-stedi-amanda"
+              value: "redis-stedi-gabe"
             - name: REDIS_PORT
               value: "6379"
             - name: REDIS_DB
@@ -49,7 +49,7 @@ spec:
             - name: TWILIO_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: amanda-twilio-dev
+                  name: gabe-twilio-dev
                   key: twilio_token
 # The ports is a list of tcp ports the pod listens on
           ports:
@@ -85,10 +85,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: dev-stedi-amanda-loadbalancer
+  name: dev-stedi-gabe-loadbalancer
 spec:
   selector:
-    app: dev-stedi-amanda
+    app: dev-stedi-gabe
   type: LoadBalancer
   ports:
     - port: 80
